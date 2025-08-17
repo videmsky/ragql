@@ -1,6 +1,6 @@
 # RAG-QL: Text-to-SQL with Mistral AI and Neon PostgreSQL
 
-A production-ready RAG (Retrieval Augmented Generation) system that converts natural language questions into SQL queries using Mistral AI for embeddings and chat models, with Neon PostgreSQL as the vector database.
+A RAG (Retrieval Augmented Generation) system that converts natural language questions into SQL queries using Mistral AI for embeddings and chat models, with Neon PostgreSQL as the vector database.
 
 ## 🚀 Features
 
@@ -30,20 +30,33 @@ The system uses a RAG approach to improve SQL generation:
 
 ### Setup
 
-1. **Clone and install dependencies**:
+1. **Setup Infrastructure** (Optional but recommended):
+   ```bash
+   # Install Pulumi and Python dependencies for infrastructure
+   cd infra
+   uv sync
+   
+   # Deploy Neon database and get connection string
+   pulumi up
+   ```
+   
+   This will create a managed Neon PostgreSQL database for you. The connection string will be output after deployment.
+
+2. **Clone and install dependencies**:
    ```bash
    git clone <repository-url>
    cd ragql
    uv sync
    ```
 
-2. **Configure environment variables**:
+3. **Configure environment variables**:
    ```bash
    cp .env.example .env
    # Edit .env with your actual API keys and database connection string
+   # If you used Pulumi in step 1, use the connection string from the output
    ```
 
-3. **Setup the system**:
+4. **Setup the system**:
    ```bash
    uv run python -m src.ragql.cli setup
    ```
@@ -256,14 +269,6 @@ uv run mypy src/
 - `generate_and_validate_sql(question)`: Generate and validate SQL
 - `generate_with_execution(question)`: Generate, validate, and execute SQL
 
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests if applicable
-5. Submit a pull request
-
 ## 📄 License
 
 This project is licensed under the MIT License. See LICENSE file for details.
@@ -274,10 +279,3 @@ This project is licensed under the MIT License. See LICENSE file for details.
 - [Neon](https://neon.tech/) for serverless PostgreSQL with pgvector
 - [LangChain](https://langchain.com/) for RAG framework components
 - Original Jupyter notebook from [Neon's cookbook](https://github.com/neondatabase/mistral-neon-text-to-sql)
-
-## 📞 Support
-
-For issues and questions:
-- Create an issue on GitHub
-- Check the [documentation](./docs/)
-- Review example queries and configurations

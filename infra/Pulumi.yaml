@@ -1,0 +1,16 @@
+name: ragql
+description: A minimal Python Pulumi program
+runtime:
+  name: python
+  options:
+    toolchain: uv
+config:
+  pulumi:tags:
+    value:
+      pulumi:template: python
+packages:
+  neon:
+    source: terraform-provider
+    version: 0.10.0
+    parameters:
+      - kislerdm/neon

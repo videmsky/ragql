@@ -1,0 +1,4 @@
+config:
+  ragql:name: lotctl
+  ragql:api_key:
+    secure: AAABAIPx6/LSIAVp2EosylTLUIfP8jcb4lAwVL6KNm+Am1d7+vRVb3b+3E7x6MwE4JDpS9DQPptnf57kgXBYNdpzAOTgByMUVqMdEWWDx29auUzGXifFNJAgv1AVAx6wD/AiYFo=

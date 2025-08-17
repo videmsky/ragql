@@ -1,30 +1,32 @@
 # Agent Guidelines for ragql
 
 ## Build/Test Commands
-- **Run main script**: `uv run main.py` or `python3 main.py`
 - **Install dependencies**: `uv sync` (manages virtual environment automatically)
-- **Add dependencies**: `uv add <package>` for runtime, `uv add --dev <package>` for dev dependencies
-- **No test framework configured** - use `uv add --dev pytest` to add testing
-- **No linting/formatting tools configured** - consider `uv add --dev ruff` for linting/formatting
+- **Run main script**: `uv run python -m ragql.cli` or `ragql` (after install)
+- **Run tests**: `uv run pytest` (pytest available in dev dependencies)
+- **Run single test**: `uv run pytest tests/test_filename.py::test_function_name`
+- **Linting**: `uv run ruff check .` (ruff available in dev dependencies)
+- **Formatting**: `uv run black .` (black available in dev dependencies) 
+- **Type checking**: `uv run mypy src/ragql` (mypy available in dev dependencies)
 
 ## Project Structure
-- UV-managed Python project with minimal setup
-- Main entry point: `main.py`
-- Python 3.13+ required (see pyproject.toml)
-- No external dependencies currently
-- UV handles virtual environment and dependency management automatically
+- UV-managed Python project with LangChain, Mistral AI, and Neon PostgreSQL
+- Main package: `src/ragql/` with CLI entry point at `ragql.cli:main`
+- Tests directory: `tests/` (minimal setup currently)
+- Python 3.13+ required, uses modern dependency management
 
 ## Code Style Guidelines
 - **Python version**: 3.13+
-- **Naming**: Use snake_case for functions/variables, PascalCase for classes
-- **Imports**: Standard library first, then third-party, then local imports
-- **Functions**: Include docstrings for non-trivial functions
-- **Error handling**: Use appropriate exception types, avoid bare except clauses
-- **Type hints**: Add type annotations for function parameters and return values
-- **Line length**: Keep reasonable (80-100 characters)
+- **Formatting**: Black-compatible (line length ~88 chars)
+- **Linting**: Ruff for fast Python linting
+- **Type hints**: Use type annotations for all function parameters and returns
+- **Imports**: Standard library, third-party (langchain, click, etc.), then local imports
+- **Naming**: snake_case for functions/variables, PascalCase for classes
+- **Docstrings**: Google style docstrings for public functions and classes
+- **Error handling**: Use specific exception types, avoid bare except clauses
+- **Async code**: Use async/await pattern with proper error handling for database operations
 
 ## Notes
-- This is a minimal UV-managed Python project without established tooling
-- Use `uv add --dev` to add development tools like pytest, ruff, and mypy
-- UV automatically manages virtual environments and lockfiles
-- No existing Cursor/Copilot rules found
+- RAG-based text-to-SQL system using Mistral AI and PostgreSQL
+- UV handles virtual environments and lockfiles automatically
+- Dev dependencies include pytest, black, ruff, and mypy for complete development workflow

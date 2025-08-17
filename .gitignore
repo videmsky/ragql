@@ -11,3 +11,5 @@ wheels/
 
 /.TODOS
 .env
+*.log
+.DS_Store
