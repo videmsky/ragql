@@ -32,6 +32,9 @@ The system uses a RAG approach to improve SQL generation:
 
 1. **Setup Infrastructure** (Optional but recommended):
    ```bash
+   git clone <repository-url>
+   cd ragql
+   
    # Install Pulumi and Python dependencies for infrastructure
    cd infra
    uv sync
@@ -40,12 +43,17 @@ The system uses a RAG approach to improve SQL generation:
    pulumi up
    ```
    
-   This will create a managed Neon PostgreSQL database for you. The connection string will be output after deployment.
+   This will create a managed Neon PostgreSQL database for you. The connection string will be output after deployment and can be retreived with the following command:
 
-2. **Clone and install dependencies**:
    ```bash
-   git clone <repository-url>
-   cd ragql
+   pulumi stack output NEON_CONNECTION_STRING --show-secrets
+   ```
+
+2. **Install dependencies for parent app**:
+   ```bash
+   # step out of infra/
+   cd ..
+   
    uv sync
    ```
 
